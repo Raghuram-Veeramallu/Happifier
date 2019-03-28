@@ -4,6 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="next">Next</string>
+    <string name="start">Start</string>
+
     <string name="welcome_text1">Hello</string>
     <string name="welcome_text2">Welcome</string>
     <string name="welcome_text3">to</string>
