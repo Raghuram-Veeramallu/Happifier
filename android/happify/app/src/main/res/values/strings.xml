@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Happify</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="welcome_text1">Hello</string>
+    <string name="welcome_text2">Welcome</string>
+    <string name="welcome_text3">to</string>
+    <string name="welcome_text4">Happifier</string>
+
+</resources>
