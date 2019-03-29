@@ -1,12 +1,33 @@
 <resources>
     <string name="app_name">Happify</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <!--DUMMY-->
+    <string name="nav_header_desc">Navigation header</string>
+
+    <!--Navigation bar-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--Tabs-->
+    <string name="title_feed">Feed</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_dummy">Dummy</string>
+    <string name="title_find_psy">Find Psycologist</string>
+
+    <!--Side Navigation Columns -->
+    <string name="side_events">Events</string>
+    <string name="side_book_app">Book an Appointment</string>
+    <string name="side_information">Information</string>
+    <string name="side_logout">Logout</string>
+
+    <!--Profile Headers-->
+    <string name="side_nav_name">Name</string>
+    <string name="side_nav_email">Email</string>
 
     <string name="next">Next</string>
     <string name="start">Start</string>
 
+    <!--Welcome Page content-->
     <string name="welcome_text1">Hello</string>
     <string name="welcome_text2">Welcome</string>
     <string name="welcome_text3">to</string>
