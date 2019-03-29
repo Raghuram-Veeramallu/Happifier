@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.semicolon.happify.QuestionnaireActivity"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/questionnaire_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="21dp"
+        android:text="Please answer the following questions:"
+        android:background="#f1efef"
+        android:textColor="#000000"
+        android:padding="5dp"
+        android:paddingTop="10dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginBottom="7dp"
+        />
+
+
+    <ListView
+        android:id="@+id/questions_list_format"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/questionnaire_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:background="#f1efef"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"/>
+</LinearLayout>

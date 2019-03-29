@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void happifyLogprocess(){
         finish();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), AskQuesPrefActivity.class));
 
     }
 
@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //            Intent i=new Intent(LoginActivity.this,MainActivity.class);
             finish();
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            startActivity(new Intent(LoginActivity.this,AskQuesPrefActivity.class));
 
             //findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
         } else {

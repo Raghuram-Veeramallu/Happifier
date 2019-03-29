@@ -140,11 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                if (firebaseAuth.getCurrentUser()==null)
-                {
-                    finish();
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                }
+                //TODO: Remove this after all the logins have been succesfully completed
+
+//                if (firebaseAuth.getCurrentUser()==null)
+//                {
+//                    finish();
+//                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+//                }
             }
         };
 
