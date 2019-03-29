@@ -33,4 +33,6 @@
     <string name="welcome_text3">to</string>
     <string name="welcome_text4">Happifier</string>
 
+    <string name="loading"> Loading... </string>
+
 </resources>

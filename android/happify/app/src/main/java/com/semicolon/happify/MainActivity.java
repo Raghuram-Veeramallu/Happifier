@@ -14,13 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView mTextMessage;
     FragmentManager fragmentManager = getFragmentManager();
 
-    //private FirebaseAuth mAuth;
-    //private FirebaseUser user;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    FirebaseAuth.AuthStateListener mAuthListener;
     private TextView userName;
     private TextView userEmail;
 
@@ -98,14 +102,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.frame_layout, new FeedActivity()).commit();
 
         } else if (id == R.id.navigation_logout) {
-            //mAuth.signOut();
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
+            mAuth.signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
 
@@ -124,6 +132,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        mAuth=FirebaseAuth.getInstance();
+
+        mAuthListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (firebaseAuth.getCurrentUser()==null)
+                {
+                    finish();
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                }
+            }
+        };
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
