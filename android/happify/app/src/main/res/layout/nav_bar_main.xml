@@ -35,8 +35,8 @@
             android:layout_gravity="bottom"
             app:menu="@menu/navigation"
             app:itemBackground="@color/colorPrimary"
-            app:itemTextColor="@color/colorPrimaryDark"
-            app:itemIconTint="@color/colorPrimaryDark"
+            app:itemTextColor="@drawable/text_tint_color_change"
+            app:itemIconTint="@drawable/text_tint_color_change"
             app:labelVisibilityMode="labeled">
         </android.support.design.widget.BottomNavigationView>
 

@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, new FeedActivity()).commit();
                     return true;
-                case R.id.navigation_dummy:
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new FeedActivity()).commit();
-                    return true;
+//                case R.id.navigation_dummy:
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.frame_layout, new FeedActivity()).commit();
+//                    return true;
                 case R.id.navigation_find_psy:
                     fragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, new FeedActivity()).commit();
@@ -103,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.navigation_logout) {
             mAuth.signOut();
+            // Remove these 2 lines lateron when the signin is setup
+            finish();
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
