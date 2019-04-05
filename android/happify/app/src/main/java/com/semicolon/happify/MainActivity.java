@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             switch (item.getItemId()) {
                 case R.id.navigation_feed:
                     fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new FeedActivity()).commit();
+                            .replace(R.id.frame_layout, new story_frag()).commit();
                     return true;
                 case R.id.navigation_chat:
                     fragmentManager.beginTransaction()
