@@ -40,38 +40,15 @@ public class story_frag extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         stories = new ArrayList<>();
-//
-//        String firstname = "Rithvik";
-//        String lastname = "Sallaram";
-//        String title = "My Interesting Story";
-//        String content = "This is my story. Veri molestie atomorum eos ei, laudem omnesque ad eam. In regione accumsan hendrerit vis, mei eu aliquid quaerendum. Habeo nullam sapientem te mea. In has illum augue, albucius delicata argumentum vis at, ex odio nemore cons";
-//        story storyobj1 = new story(firstname, lastname, content, title);
-//        stories.add(storyobj1);
-//
-//        String firstname1 = "Raman";
-//        String lastname1 = "Dutt";
-//        String title1 = "My Awesome Story";
-//        String content1 = "Veri molestie atomorum eos ei, laudem omnesque ad eam. In regione accumsan hendrerit vis, mei eu aliquid quaerendum. Habeo nullam sapientem te mea. In has illum augue, albucius delicata argumentum vis at, ex odio nemore cons";
-//        story storyobj2 = new story(firstname1, lastname1, content1, title1);
-//        stories.add(storyobj2);
-//
-//        String firstname2 = "Rishabb";
-//        String lastname2 = "Ranjan";
-//        String title2 = "My amazing Story";
-//        String content2 = "Veri molestie atomorum eos ei, laudem omnesque ad eam. In regione accumsan hendrerit vis, mei eu aliquid quaerendum. Habeo nullam sapientem te mea. In has illum augue, albucius delicata argumentum vis at, ex odio nemore cons";
-//        story storyobj3 = new story(firstname2, lastname2, content2, title2);
-//        stories.add(storyobj3);
-//
-//        adapter = new MyAdapter(getActivity(), stories);
-//        recyclerView.setAdapter(adapter);
-        Log.w(TAG, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        progressDialog = new ProgressDialog(getActivity());
 
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
 
         db=FirebaseFirestore.getInstance();
         //displaying progress dialog while fetching images
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
+
         Log.w(TAG, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         Loaddatafromfirebase();
         progressDialog.dismiss();
