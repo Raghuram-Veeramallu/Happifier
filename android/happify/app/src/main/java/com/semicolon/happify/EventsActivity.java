@@ -19,7 +19,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -32,6 +34,7 @@ public class EventsActivity extends Fragment {
     private ProgressDialog progressDialog;
     private List<Event> events;
     FirebaseFirestore db ;
+    SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     @Nullable
     @Override
@@ -56,6 +59,7 @@ public class EventsActivity extends Fragment {
     }
 
     void Loaddatafromfirebase(){
+
         db.collection("Events")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -64,7 +68,8 @@ public class EventsActivity extends Fragment {
                         for (DocumentSnapshot document : task.getResult()) {
                             String eventTitle = document.getString("eventTitle");
                             String eventLocation = document.getString("eventLocation");
-                            String eventDate = document.getString("eventDate");
+                            //String eventDate = document.getString("eventDate");
+                            String eventDate = sfd.format(document.getDate("eventDate"));
                             Event eventObj = new Event(eventTitle, eventLocation, eventDate);
                             events.add(eventObj);
                         }
