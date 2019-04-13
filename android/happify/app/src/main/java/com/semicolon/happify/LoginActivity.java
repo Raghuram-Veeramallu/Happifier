@@ -25,7 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button googleLogin, happifyLogin;
+    Button googleLogin, volunteerLogin;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN=2;
@@ -38,15 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         googleLogin = findViewById(R.id.google_signup);
-        happifyLogin = findViewById(R.id.happify_signup);
+        volunteerLogin = findViewById(R.id.volunteer_signup);
 
         mAuth = FirebaseAuth.getInstance();
 
 
-        happifyLogin.setOnClickListener(new View.OnClickListener() {
+        volunteerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                happifyLogprocess();
+                //volunteerLogprocess();
 
             }
         });
@@ -133,9 +133,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    protected void happifyLogprocess(){
-        finish();
-        startActivity(new Intent(getApplicationContext(), AskQuesPrefActivity.class));
+    protected void volunteerLogProcess(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+        // Check with database
 
     }
 
@@ -152,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
 //            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(R.id.google_signup).setVisibility(View.GONE);
-            findViewById(R.id.happify_signup).setVisibility(View.GONE);
+            findViewById(R.id.volunteer_signup).setVisibility(View.GONE);
 
 //            Intent i=new Intent(LoginActivity.this,MainActivity.class);
             finish();
@@ -164,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
 //            mDetailTextView.setText(null);
 
             findViewById(R.id.google_signup).setVisibility(View.VISIBLE);
-            findViewById(R.id.happify_signup).setVisibility(View.VISIBLE);
+            findViewById(R.id.volunteer_signup).setVisibility(View.VISIBLE);
         }
     }
 
