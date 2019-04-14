@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public ProgressDialog mProgressDialog;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -99,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(currentUser); //Update UI to current user
+        updateUI(currentUser);      //Update UI to current user
     }
 
 
@@ -152,10 +154,13 @@ public class LoginActivity extends AppCompatActivity {
 //            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
 //            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
+            //TODO: Use this user class for user name and email.
+
             findViewById(R.id.google_signup).setVisibility(View.GONE);
             findViewById(R.id.volunteer_signup).setVisibility(View.GONE);
 
 //            Intent i=new Intent(LoginActivity.this,MainActivity.class);
+
             finish();
             startActivity(new Intent(LoginActivity.this,AskQuesPrefActivity.class));
 
