@@ -54,32 +54,30 @@ public class QuestionnaireActivity extends AppCompatActivity {
         addQuestionsToList();
         setup_questions_list();
 
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//
-//                //TODO: Remove this after complete login setup
-//
-////                if (firebaseAuth.getCurrentUser()==null)
-////                {
-////                    Intent i=new Intent(QuestionnaireActivity.this, LoginActivity.class);
-////                    startActivity(i);
-////                }
-//            }
-//        };
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (firebaseAuth.getCurrentUser()==null)
+                {
+                    Intent i=new Intent(QuestionnaireActivity.this, LoginActivity.class);
+                    startActivity(i);
+                }
+            }
+        };
 
     }
 
     private void addQuestionsToList(){
         //TODO: Remove this function after making proper list in Firebase
-        Question_ques.add("Having Upsetting thought or images about the traumatic event that come into your head when you did not want them to.");
-        Question_ques.add("Having bad dreams or nightmares about the event.");
-        Question_ques.add("Reliving the traumatic event");
-        Question_ques.add("Feeling emotionally upset when you are reminded of the traumatic event.");
-        Question_ques.add("Experiencing physical reactions when you are reminded of the traumatic event (sweating, increased heart rate.");
-        Question_ques.add("Trying not to think or talk about the traumatic event.");
-        Question_ques.add("Trying to avoid activities or people that remind you of that traumatic event.");
-        Question_ques.add("Not being able to remember an important part of the traumatic event.");
+        Question_ques.add("Having Upsetting thought or images about the traumatic Event that come into your head when you did not want them to.");
+        Question_ques.add("Having bad dreams or nightmares about the Event.");
+        Question_ques.add("Reliving the traumatic Event");
+        Question_ques.add("Feeling emotionally upset when you are reminded of the traumatic Event.");
+        Question_ques.add("Experiencing physical reactions when you are reminded of the traumatic Event (sweating, increased heart rate.");
+        Question_ques.add("Trying not to think or talk about the traumatic Event.");
+        Question_ques.add("Trying to avoid activities or people that remind you of that traumatic Event.");
+        Question_ques.add("Not being able to remember an important part of the traumatic Event.");
         Question_ques.add("Having much less interest or participation in important activities.");
         Question_ques.add("Feeling distant or cut off from people around you.");
         Question_ques.add("Feeling emotionally numb (unable to cry or have feelings)");

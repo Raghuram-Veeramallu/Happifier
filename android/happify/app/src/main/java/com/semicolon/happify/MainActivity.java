@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -40,15 +41,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 case R.id.navigation_chat:
                     fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new FeedActivity()).commit();
+                            .replace(R.id.frame_layout, new MapsActivity()).commit();
                     return true;
 //                case R.id.navigation_dummy:
 //                    fragmentManager.beginTransaction()
-//                            .replace(R.id.frame_layout, new FeedActivity()).commit();
+//                            .replace(R.id.frame_layout, new MapsActivity()).commit();
 //                    return true;
                 case R.id.navigation_find_psy:
                     fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new FeedActivity()).commit();
+                            .replace(R.id.frame_layout, new MapsActivity()).commit();
                     return true;
             }
             return false;
@@ -91,21 +92,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.navigation_events) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new FeedActivity()).commit();
+                    .replace(R.id.frame_layout, new EventsActivity()).commit();
 
         } else if (id == R.id.navigation_book_app) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new FeedActivity()).commit();
+                    .replace(R.id.frame_layout, new MapsActivity()).commit();
 
         } else if (id == R.id.navigation_info) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new FeedActivity()).commit();
+                    .replace(R.id.frame_layout, new MapsActivity()).commit();
 
         } else if (id == R.id.navigation_logout) {
             mAuth.signOut();
             // Remove these 2 lines lateron when the signin is setup
-            finish();
-            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+//            finish();
+//            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentManager.beginTransaction().replace(R.id.frame_layout, new FeedActivity()).commit();
+        fragmentManager.beginTransaction().replace(R.id.frame_layout, new story_frag()).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,21 +138,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
 
+        User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
+        //setNameEmail(user);
+        Log.d("LOGERR", user.getUserEmail() + " " + user.getUserGoogleName());
+
+
         mAuth=FirebaseAuth.getInstance();
 
         mAuthListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                //TODO: Remove this after all the logins have been succesfully completed
-
-//                if (firebaseAuth.getCurrentUser()==null)
-//                {
-//                    finish();
-//                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
-//                }
+                if (firebaseAuth.getCurrentUser()==null)
+                {
+                    finish();
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                }
             }
         };
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -160,5 +165,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigationBottom);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+
+    protected void setNameEmail(User user){
+        if ((findViewById(R.id.toolbar_user_email) != null) && (findViewById(R.id.toolbar_user_name) != null)){
+            userName = (TextView) findViewById(R.id.toolbar_user_name);
+            userEmail = (TextView) findViewById(R.id.toolbar_user_email);
+            Log.d("LOGERR",userName.getText().toString());
+            userName.setText(user.getUserGoogleName());
+            userEmail.setText(user.getUserEmail());
+        }
+    }
+
 
 }

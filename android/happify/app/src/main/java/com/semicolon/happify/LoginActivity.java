@@ -25,12 +25,14 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button googleLogin, happifyLogin;
+    Button googleLogin, volunteerLogin;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN=2;
 
     public ProgressDialog mProgressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,15 +40,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         googleLogin = findViewById(R.id.google_signup);
-        happifyLogin = findViewById(R.id.happify_signup);
+        volunteerLogin = findViewById(R.id.volunteer_signup);
 
         mAuth = FirebaseAuth.getInstance();
 
 
-        happifyLogin.setOnClickListener(new View.OnClickListener() {
+        volunteerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                happifyLogprocess();
+                //volunteerLogprocess();
 
             }
         });
@@ -99,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(currentUser); //Update UI to current user
+        updateUI(currentUser);      //Update UI to current user
     }
 
 
@@ -133,9 +135,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    protected void happifyLogprocess(){
-        finish();
-        startActivity(new Intent(getApplicationContext(), AskQuesPrefActivity.class));
+    protected void volunteerLogProcess(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+        // Check with database
 
     }
 
@@ -151,10 +154,13 @@ public class LoginActivity extends AppCompatActivity {
 //            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
 //            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
+            //TODO: Use this user class for user name and email.
+
             findViewById(R.id.google_signup).setVisibility(View.GONE);
-            findViewById(R.id.happify_signup).setVisibility(View.GONE);
+            findViewById(R.id.volunteer_signup).setVisibility(View.GONE);
 
 //            Intent i=new Intent(LoginActivity.this,MainActivity.class);
+
             finish();
             startActivity(new Intent(LoginActivity.this,AskQuesPrefActivity.class));
 
@@ -164,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
 //            mDetailTextView.setText(null);
 
             findViewById(R.id.google_signup).setVisibility(View.VISIBLE);
-            findViewById(R.id.happify_signup).setVisibility(View.VISIBLE);
+            findViewById(R.id.volunteer_signup).setVisibility(View.VISIBLE);
         }
     }
 
