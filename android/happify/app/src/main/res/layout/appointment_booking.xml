@@ -7,29 +7,30 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/cityTextHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="33dp"
         android:layout_marginTop="153dp"
-        android:text="TextView" />
+        android:layout_marginBottom="395dp"
+        android:text="City" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView2"
+
+    <Spinner
+        android:id="@+id/citySpinner"
+        android:layout_width="160dp"
+        android:layout_height="31dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="207dp"
-        android:text="TextView" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginBottom="388dp"
+        android:layout_toEndOf="@+id/cityTextHolder"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:text="TextView" />
+
 </RelativeLayout>
