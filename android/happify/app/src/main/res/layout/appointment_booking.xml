@@ -7,15 +7,71 @@
 
 
     <TextView
+        android:id="@+id/dateTextHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginBottom="187dp"
+        android:text="Date" />
+
+    <Spinner
+        android:id="@+id/doctorSpinner"
+        android:layout_width="160dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginBottom="235dp"
+        android:layout_toEndOf="@+id/cityTextHolder"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/doctorTextHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="243dp"
+        android:text="Doctor" />
+
+    <Spinner
+        android:id="@+id/areaSpinner"
+        android:layout_width="160dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="233dp"
+        android:layout_marginBottom="303dp"
+        android:layout_toEndOf="@+id/cityTextHolder"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/areaTextHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cityTextHolder"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginBottom="308dp"
+        android:text="Area" />
+
+    <TextView
         android:id="@+id/cityTextHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="33dp"
         android:layout_marginTop="153dp"
-        android:layout_marginBottom="395dp"
         android:text="City" />
 
 
@@ -24,10 +80,8 @@
         android:layout_width="160dp"
         android:layout_height="31dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="64dp"
         android:layout_marginTop="148dp"
-        android:layout_marginBottom="388dp"
         android:layout_toEndOf="@+id/cityTextHolder"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
