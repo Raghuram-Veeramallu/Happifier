@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.navigation_book_app) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new MapsActivity()).commit();
+                    .replace(R.id.frame_layout, new AppointmentBookingActivity()).commit();
 
         } else if (id == R.id.navigation_info) {
             fragmentManager.beginTransaction()
@@ -138,11 +138,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
 
-        User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
-        //setNameEmail(user);
-        Log.d("LOGERR", user.getUserEmail() + " " + user.getUserGoogleName());
-
-
         mAuth=FirebaseAuth.getInstance();
 
         mAuthListener=new FirebaseAuth.AuthStateListener() {
@@ -153,6 +148,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     finish();
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                } else{
+                    User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
+                    setNameEmail(user);
+                    Log.d("LOGERR", user.getUserEmail() + " " + user.getUserGoogleName());
                 }
             }
         };

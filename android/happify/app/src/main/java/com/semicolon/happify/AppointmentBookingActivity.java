@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class AppointmentBooking extends Fragment {
+public class AppointmentBookingActivity extends Fragment {
 
     View myView;
     Spinner cityDd, areaDd, doctorDd;
@@ -30,7 +30,7 @@ public class AppointmentBooking extends Fragment {
         cityDd = (Spinner) myView.findViewById(R.id.citySpinner);
 
         String[] items = new String[]{"1", "2", "three"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>()
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,items);
         cityDd.setAdapter(adapter);
 
         return myView;
