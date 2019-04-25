@@ -3,7 +3,7 @@
     <color name="colorPrimary">#f2c807</color>
     <color name="colorPrimaryDark">#d4a79707</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="popupbackground">#67f4c701</color>
+    <color name="popupbackground">#f1f1d65f</color>
 
 
     <!-- Screens background color-->
@@ -11,6 +11,7 @@
     <color name="bg_screen2">#20d2bb</color>
     <color name="bg_screen3">#3395ff</color>
     <color name="bg_screen4">#c873f4</color>
+
 
     <color name="main_red">#C42C15</color>
 
