@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,6 +36,7 @@ public class story_frag extends Fragment {
     private RecyclerView.Adapter adapter;
     private ProgressDialog progressDialog;
     FragmentManager fragmentManager;
+    private FloatingActionButton fab;
     private List<story> stories;
     View myView;
     FirebaseFirestore db ;
@@ -56,38 +58,42 @@ public class story_frag extends Fragment {
         db=FirebaseFirestore.getInstance();
         //displaying progress dialog while fetching images
 
-        Log.w(TAG, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         Loaddatafromfirebase();
         progressDialog.dismiss();
 
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.floating_add);
+        fab = (FloatingActionButton) myView.findViewById(R.id.floating_add);
 
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Button close_button;
-//                myDialog.setContentView(R.layout.new_story_popup);
-//                close_button =(Button) myDialog.findViewById(R.id.close_button_popup);
-//                close_button.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        myDialog.dismiss();
-//                    }
-//                });
-//                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                myDialog.show();
-//
-//
-//
-////                fragmentManager.beginTransaction()
-////                        .replace(R.id.frame_layout, new ad_postingActivity()).addToBackStack("ads_stack").commit();
-//
-//
-//            }
-//        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //fabAction();
+                //Log.d("LOGERR","Floating Action Button");
+            }
+        });
 
         return myView;
     }
+
+    public void fabAction(){
+        Button close_button;
+        myDialog.setContentView(R.layout.new_story_popup);
+        close_button =(Button) myDialog.findViewById(R.id.close_button_popup);
+                close_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                    }
+                });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+
+
+
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.frame_layout, new ad_postingActivity()).addToBackStack("ads_stack").commit();
+    }
+
+
     void Loaddatafromfirebase(){
         Log.w(TAG, "Entered function");
 
@@ -107,7 +113,6 @@ public class story_frag extends Fragment {
                                 String content = document.getString("content");
                                 story storyobj = new story(firstname, lastname, content, title);
                                 stories.add(storyobj);
-                                Log.w(TAG, firstname);
                             }
 
                             adapter = new MyAdapter(getActivity(), stories);

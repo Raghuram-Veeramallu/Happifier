@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AskQuesPrefActivity"></activity>
+        <activity android:name=".Chat"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".QuestionnaireActivity"></activity>

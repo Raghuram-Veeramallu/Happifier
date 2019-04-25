@@ -32,7 +32,7 @@ public class AppointmentBookingActivity extends Fragment {
 
     View myView;
     private Spinner citySpinner, areaSpinner, doctorSpinner;
-    private EditText dateChooser;
+    EditText dateChooser;
     private Button bookAppointment;
     private ProgressDialog progressDialog;
     private FirebaseFirestore db ;
@@ -95,9 +95,9 @@ public class AppointmentBookingActivity extends Fragment {
     }
 
     public void setSpinners(){
-        String[] cities = new String[]{"Noida", "Delhi", "Mumbai"};  // temp
-        String[] areas = new String[]{"GB Nagar", "Dadri", "Sonpet"};
-        String[] doctors = new String[]{"SD", "VS", "RJ"};
+        String[] cities = new String[]{"", "Noida", "Delhi", "Mumbai"};  // temp
+        String[] areas = new String[]{"", "GB Nagar", "Dadri", "Sonpet"};
+        String[] doctors = new String[]{"", "SD", "VS", "RJ"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
         citySpinner.setAdapter(adapter);
         ArrayAdapter<String> areaAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, areas);

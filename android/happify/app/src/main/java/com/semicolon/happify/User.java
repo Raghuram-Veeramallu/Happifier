@@ -7,10 +7,11 @@ import android.util.Log;
 
 public class User {
 
-    private String userGoogleName;
-    private String userEmail;
-    private String userPrefName;
-    private Uri userImageUri;
+    private static String userGoogleName;
+    private static String userEmail;
+    private static String userPrefName;
+    public static String chatwith;
+    private static Uri userImageUri;
 
     public User(String name, String email, Uri url){
         this.userGoogleName = name;
@@ -19,36 +20,36 @@ public class User {
     }
 
 
-    public String getUserGoogleName() {
+    public static String getUserGoogleName() {
         return userGoogleName;
     }
 
-    public void setUserGoogleName(String userGoogleName) {
-        this.userGoogleName = userGoogleName;
+    public static void setUserGoogleName(String userGoogleName) {
+        User.userGoogleName = userGoogleName;
     }
 
-    public String getUserEmail() {
+    public static String getUserEmail() {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public static void setUserEmail(String userEmail) {
+        User.userEmail = userEmail;
     }
 
-    public String getUserPrefName() {
+    public static String getUserPrefName() {
         return userPrefName;
     }
 
-    public void setUserPrefName(String userPrefName) {
-        this.userPrefName = userPrefName;
+    public static void setUserPrefName(String userPrefName) {
+        User.userPrefName = userPrefName;
     }
 
-    public Uri getUserImageUri() {
+    public static Uri getUserImageUri() {
         return userImageUri;
     }
 
-    public void setUserImageUri(Uri userImage) {
-        this.userImageUri = userImage;
+    public static void setUserImageUri(Uri userImage) {
+        User.userImageUri = userImage;
     }
 
 }

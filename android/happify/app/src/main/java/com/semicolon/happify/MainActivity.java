@@ -3,6 +3,8 @@ package com.semicolon.happify;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -20,6 +22,10 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 case R.id.navigation_chat:
                     fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new MapsActivity()).commit();
+                            .replace(R.id.frame_layout, new Users()).commit();
                     return true;
 //                case R.id.navigation_dummy:
 //                    fragmentManager.beginTransaction()
@@ -155,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else{
                     User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail(), mAuth.getCurrentUser().getPhotoUrl());
                     setNameEmail(user);
-                    Log.d("LOGERR", user.getUserEmail() + " " + user.getUserGoogleName());
                 }
             }
         };
@@ -175,12 +180,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userName = (TextView) findViewById(R.id.toolbar_user_name);
             userEmail = (TextView) findViewById(R.id.toolbar_user_email);
             userPhoto = (ImageView) findViewById(R.id.toolbar_profile_image);
-            //Log.d("LOGERR",userName.getText().toString());
             userName.setText(user.getUserGoogleName());
             userEmail.setText(user.getUserEmail());
             try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),user.getUserImageUri());
-                userPhoto.setImageBitmap(bitmap);
+                InputStream imageInpStr = getContentResolver().openInputStream(user.getUserImageUri());
+                userPhoto.setImageBitmap(BitmapFactory.decodeStream(imageInpStr));
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(user.getUserImageUri()));
+                //userPhoto.setImageBitmap(bitmap);
             }catch(Exception e){
                 Log.d("LOGERR","Couldn't not load image "+e.getMessage());
             }
