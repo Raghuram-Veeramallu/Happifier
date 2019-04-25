@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userName;
     private TextView userEmail;
     private ImageView userPhoto;
+    public User localUser;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -159,8 +160,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     finish();
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 } else{
-                    User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail(), mAuth.getCurrentUser().getPhotoUrl());
-                    setNameEmail(user);
+                    localUser = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail(), mAuth.getCurrentUser().getPhotoUrl());
+                    setNameEmail(localUser);
+                    Log.d("LOGERR", localUser.getUserEmail() + " " + localUser.getUserGoogleName());
                 }
             }
         };
