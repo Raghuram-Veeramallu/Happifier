@@ -7,30 +7,116 @@
 
 
     <TextView
-        android:id="@+id/cityTextHolder"
+        android:id="@+id/bookingtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:textSize="32sp"
+        android:text="Book Doctor Appointment" />
+
+
+    <TextView
+        android:id="@+id/cityTextHolder"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="153dp"
-        android:layout_marginBottom="395dp"
-        android:text="City" />
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="160dp"
+        android:text="City"
+        android:textSize="20sp" />
 
 
     <Spinner
         android:id="@+id/citySpinner"
-        android:layout_width="160dp"
-        android:layout_height="31dp"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginBottom="388dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="155dp"
         android:layout_toEndOf="@+id/cityTextHolder"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
+
+
+    <TextView
+        android:id="@+id/areaTextHolder"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="250dp"
+        android:text="Area"
+        android:textSize="20sp" />
+
+
+    <Spinner
+        android:id="@+id/areaSpinner"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="245dp"
+        android:layout_toEndOf="@+id/cityTextHolder"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+
+    <TextView
+        android:id="@+id/doctorTextHolder"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="340dp"
+        android:text="Doctor"
+        android:textSize="20sp" />
+
+
+    <Spinner
+        android:id="@+id/doctorSpinner"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="335dp"
+        android:layout_toEndOf="@+id/cityTextHolder"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+
+    <TextView
+        android:id="@+id/dateTextHolder"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="430dp"
+        android:textSize="20sp"
+        android:text="Date" />
+
+    <EditText
+        android:id="@+id/dateEntryBookApp"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/doctorSpinner"
+        android:layout_alignBottom="@+id/dateTextHolder"
+        android:ems="10"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/bookAppointButton"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="90dp"
+        android:text="Book Appointment" />
 
 
 </RelativeLayout>

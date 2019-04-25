@@ -2,7 +2,9 @@ package com.semicolon.happify;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseAuth.AuthStateListener mAuthListener;
     private TextView userName;
     private TextView userEmail;
+    private ImageView userPhoto;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -149,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     finish();
                     startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 } else{
-                    User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail());
+                    User user = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail(), mAuth.getCurrentUser().getPhotoUrl());
                     setNameEmail(user);
                     Log.d("LOGERR", user.getUserEmail() + " " + user.getUserGoogleName());
                 }
@@ -170,9 +174,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if ((findViewById(R.id.toolbar_user_email) != null) && (findViewById(R.id.toolbar_user_name) != null)){
             userName = (TextView) findViewById(R.id.toolbar_user_name);
             userEmail = (TextView) findViewById(R.id.toolbar_user_email);
-            Log.d("LOGERR",userName.getText().toString());
+            userPhoto = (ImageView) findViewById(R.id.toolbar_profile_image);
+            //Log.d("LOGERR",userName.getText().toString());
             userName.setText(user.getUserGoogleName());
             userEmail.setText(user.getUserEmail());
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),user.getUserImageUri());
+                userPhoto.setImageBitmap(bitmap);
+            }catch(Exception e){
+                Log.d("LOGERR","Couldn't not load image "+e.getMessage());
+            }
         }
     }
 
