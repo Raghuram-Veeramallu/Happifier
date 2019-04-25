@@ -1,15 +1,21 @@
 package com.semicolon.happify;
 
+import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,24 +30,25 @@ import static android.content.ContentValues.TAG;
 //import com.google.firebase.firestore.FirebaseFirestore;
 
 public class story_frag extends Fragment {
-
+    Dialog myDialog;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private ProgressDialog progressDialog;
+    FragmentManager fragmentManager;
     private List<story> stories;
     View myView;
     FirebaseFirestore db ;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.story_feed, container, false);
-
+        myDialog = new Dialog(getActivity());
 
         recyclerView = (RecyclerView) myView.findViewById(R.id.myRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         stories = new ArrayList<>();
 
-
+        fragmentManager = getActivity().getFragmentManager();
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
@@ -52,6 +59,32 @@ public class story_frag extends Fragment {
         Log.w(TAG, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         Loaddatafromfirebase();
         progressDialog.dismiss();
+
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.floating_add);
+
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Button close_button;
+//                myDialog.setContentView(R.layout.new_story_popup);
+//                close_button =(Button) myDialog.findViewById(R.id.close_button_popup);
+//                close_button.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        myDialog.dismiss();
+//                    }
+//                });
+//                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                myDialog.show();
+//
+//
+//
+////                fragmentManager.beginTransaction()
+////                        .replace(R.id.frame_layout, new ad_postingActivity()).addToBackStack("ads_stack").commit();
+//
+//
+//            }
+//        });
 
         return myView;
     }
