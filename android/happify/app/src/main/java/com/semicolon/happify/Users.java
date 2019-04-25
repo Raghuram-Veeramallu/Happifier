@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,44 +49,44 @@ public class Users extends Fragment{
         String url = "https://spmproject-be72b.firebaseio.com/Volunteers.json";
         String url1 = "https://spmproject-be72b.firebaseio.com/messages.json";
         //String s = "https://spmproject-be72b.firebaseio.com/Users.json";
-        int j=0;
-        try {
-            JSONObject obj = new JSONObject(url);
-
-            Iterator i = obj.keys();
-            String key = "";
-
-            while(i.hasNext()){
-                key = i.next().toString();
-
-                if((key.equals(User.getUserEmail().split("@")[0])) ) {
-//                    key +="\n"+obj.getJSONObject(key).getString("Tag");
-//                    map.put(key,key);
-//                    al.add(key);
-                    j++;
-                }
-
-                //totalUsers++;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        int j=0;
+//        try {
+//            JSONObject obj = new JSONObject(url);
+//
+//            Iterator i = obj.keys();
+//            String key = "";
+//
+//            while(i.hasNext()){
+//                key = i.next().toString();
+//
+//                if((key.equals(User.getUserEmail().split("@")[0])) ) {
+////                    key +="\n"+obj.getJSONObject(key).getString("Tag");
+////                    map.put(key,key);
+////                    al.add(key);
+//                    j++;
+//                }
+//
+//                //totalUsers++;
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         StringRequest request;
-        if(j>0) {
-            request = new StringRequest(Request.Method.GET, url1, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    doOnSuccess1(s);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    System.out.println("" + volleyError);
-                }
-            });
-        }
-        else {
+//        if(j>0) {
+//            request = new StringRequest(Request.Method.GET, url1, new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String s) {
+//                    doOnSuccess1(s);
+//                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError volleyError) {
+//                    System.out.println("" + volleyError);
+//                }
+//            });
+//        }
+//        else {
 
             request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
@@ -98,7 +99,7 @@ public class Users extends Fragment{
                     System.out.println("" + volleyError);
                 }
             });
-        }
+//        }
         RequestQueue rQueue = Volley.newRequestQueue(getActivity());
         rQueue.add(request);
         //rQueue.add(request1);
@@ -150,43 +151,44 @@ public class Users extends Fragment{
         pd.dismiss();
     }
 
-    public void doOnSuccess1(String s){
-        try {
-            JSONObject obj = new JSONObject(s);
-
-            Iterator i = obj.keys();
-            String key = "";
-
-            while(i.hasNext()){
-                key = i.next().toString();
-                String[] str = key.split("_");
-                if((str[0].equals(User.getUserEmail().split("@")[0]))) {
-                    //key +="\n"+obj.getJSONObject(key).getString("Tag");
-                    //map.put(str[0],str[0]);
-                    //map.put(str[1],str[1]);
-                    al.add(str[1]);
-                }
-
-
-                totalUsers++;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        if(totalUsers <=1){
-            noUsersText.setVisibility(View.VISIBLE);
-            usersList.setVisibility(View.GONE);
-        }
-        else{
-            noUsersText.setVisibility(View.GONE);
-            usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, al));
-        }
-
-        pd.dismiss();
-    }
+//    public void doOnSuccess1(String s){
+//        try {
+//            JSONObject obj = new JSONObject(s);
+//
+//            Iterator i = obj.keys();
+//            String key = "";
+//
+//            while(i.hasNext()){
+//                key = i.next().toString();
+//                String[] str = key.split("_");
+//                if((str[0].equals(User.getUserEmail().split("@")[0]))) {
+//                    //key +="\n"+obj.getJSONObject(key).getString("Tag");
+//                    //map.put(str[0],str[0]);
+//                    //map.put(str[1],str[1]);
+//                    al.add(str[1]);
+//                    //Log.d("LOGERR", str[1]);
+//                }
+//
+//
+//                totalUsers++;
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        if(totalUsers <=1){
+//            noUsersText.setVisibility(View.VISIBLE);
+//            usersList.setVisibility(View.GONE);
+//        }
+//        else{
+//            noUsersText.setVisibility(View.GONE);
+//            usersList.setVisibility(View.VISIBLE);
+//            usersList.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, al));
+//        }
+//
+//        pd.dismiss();
+//    }
 
 
 }

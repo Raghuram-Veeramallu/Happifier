@@ -45,7 +45,6 @@ public class story_frag extends Fragment {
     private FloatingActionButton fab;
     private ProgressDialog progressDialog;
     FragmentManager fragmentManager;
-    private FloatingActionButton fab;
     private List<story> stories;
     private TextView story_title_add;
     private TextView story_add;

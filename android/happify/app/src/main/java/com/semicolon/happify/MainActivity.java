@@ -20,6 +20,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -33,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager = getFragmentManager();
 
     FirebaseAuth mAuth;
+    GoogleSignInOptions mGoogleSignInOptions;
+    GoogleSignInClient mGoogleSignInClient;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     private TextView userName;
@@ -54,10 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, new Users()).commit();
                     return true;
-//                case R.id.navigation_dummy:
-//                    fragmentManager.beginTransaction()
-//                            .replace(R.id.frame_layout, new MapsActivity()).commit();
-//                    return true;
                 case R.id.navigation_find_psy:
                     fragmentManager.beginTransaction()
                             .replace(R.id.frame_layout, new MapsActivity()).commit();
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.frame_layout, new MapsActivity()).commit();
 
         } else if (id == R.id.navigation_logout) {
-            mAuth.signOut();
+            completeSignOut();
             // Remove these 2 lines lateron when the signin is setup
 //            finish();
 //            startActivity(new Intent(MainActivity.this,LoginActivity.class));
@@ -130,6 +133,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
+
+//    private void revokeAccess() {
+//        mGoogleSignInClient.revokeAccess()
+//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        // ...
+//                    }
+//                });
+//    }
 
 
     @Override
@@ -151,7 +164,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener=new FirebaseAuth.AuthStateListener() {
+        mGoogleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions);
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
@@ -176,6 +196,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+
+    private void completeSignOut(){
+        mAuth.signOut();
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        //updateUI(null);
+                    }
+                });
+    }
 
     protected void setNameEmail(User user){
         if ((findViewById(R.id.toolbar_user_email) != null) && (findViewById(R.id.toolbar_user_name) != null)){
