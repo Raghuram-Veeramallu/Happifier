@@ -1,11 +1,13 @@
 package com.semicolon.happify;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,7 @@ public class AppointmentBookingActivity extends Fragment {
     private FirebaseFirestore db ;
     HashMap<String, String> cityArea;
     HashMap<String, String> areaDoc;
+    private FragmentActivity myContext;
 
     @Nullable
     @Override
@@ -54,6 +57,19 @@ public class AppointmentBookingActivity extends Fragment {
         progressDialog.show();
 
         setSpinners();
+        dateChooser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v);
+            }
+        });
+
+        bookAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookAppointmentEntry();
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
 
@@ -63,14 +79,23 @@ public class AppointmentBookingActivity extends Fragment {
         return myView;
     }
 
-    public void showDatePickerDialog(View v) {
-        //DialogFragment newFragment = new DatePicker();
-        //newFragment.show(, "datePicker");
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePicker();
+        newFragment.show(myContext.getSupportFragmentManager(), "datePicker");
+    }
+
+    public void bookAppointmentEntry(){
+
+    }
 
     public void setSpinners(){
-        String[] cities = new String[]{"Noida", "Delhi", "Mumbai"};  // te,p
+        String[] cities = new String[]{"Noida", "Delhi", "Mumbai"};  // temp
         String[] areas = new String[]{"GB Nagar", "Dadri", "Sonpet"};
         String[] doctors = new String[]{"SD", "VS", "RJ"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
