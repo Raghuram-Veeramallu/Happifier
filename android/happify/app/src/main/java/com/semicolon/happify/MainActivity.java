@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    .replace(R.id.frame_layout, new AppointmentBookingActivity()).commit();
 
         } else if (id == R.id.navigation_info) {
-            loadFragment(new MapsActivity());
+            startActivity(new Intent(this, QuestionPrefActivity.class));
+            //loadFragment(new QuestPrefListActivity());
 //            fragmentManager.beginTransaction()
 //                    .replace(R.id.frame_layout, new MapsActivity()).commit();
 
