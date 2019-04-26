@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,10 +43,10 @@ public class story_frag extends Fragment {
     FirebaseAuth mAuth;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+    boolean checked_anonymouse=false;
     private FloatingActionButton fab;
     private ProgressDialog progressDialog;
     FragmentManager fragmentManager;
-    private FloatingActionButton fab;
     private List<story> stories;
     private TextView story_title_add;
     private TextView story_add;
@@ -110,12 +111,27 @@ public class story_frag extends Fragment {
 
 
     void fabAction(){
+        checked_anonymouse=false;
         localUser1 = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail(), mAuth.getCurrentUser().getPhotoUrl());
         ImageView close_button;
         Button post_button;
         myDialog.setContentView(R.layout.new_story_popup);
         story_title_add = myDialog.findViewById(R.id.story_title_add);
         story_add = myDialog.findViewById(R.id.story_add);
+        Button checkbtn =  myDialog.findViewById(R.id.anonymous_check_box);
+        checkbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(checked_anonymouse==false){
+                    checked_anonymouse=true;
+                    System.out.println(checked_anonymouse);
+                }
+                else if(checked_anonymouse==true){
+                    checked_anonymouse=false;
+                    System.out.println(checked_anonymouse);
+                }
+            }
+        });
+
         close_button =(ImageView) myDialog.findViewById(R.id.close_button_popup);
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,11 +146,16 @@ public class story_frag extends Fragment {
                 int i = view.getId();
                 if (i == R.id.post_story_button) {
                     if (validateForm()) {
-                        addStoryToDatabase();
+                        if(checked_anonymouse==false){
+                        addStoryToDatabase();}
+                        else if(checked_anonymouse==true){
+                            addStoryToDatabase_anonymous();
+                        }
+                        myDialog.dismiss();
                     }
 
                 }
-                myDialog.dismiss();
+
             }
 
         });
@@ -170,6 +191,30 @@ public class story_frag extends Fragment {
         Map<String, Object> data = new HashMap<>();
         data.put("authorFirstName",localUser1.getUserGoogleName() );
         data.put("authorLastName", " ");
+        data.put("title",title_content );
+        data.put("content", story_content);
+        data.put("createdAt", FieldValue.serverTimestamp());
+
+        db.collection("projects")
+                .add(data)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+    }
+    void addStoryToDatabase_anonymous(){
+        Map<String, Object> data = new HashMap<>();
+        data.put("authorFirstName","Anonymous User");
+        data.put("authorLastName", "");
         data.put("title",title_content );
         data.put("content", story_content);
         data.put("createdAt", FieldValue.serverTimestamp());

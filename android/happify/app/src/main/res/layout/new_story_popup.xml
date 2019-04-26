@@ -63,12 +63,15 @@
             android:inputType="text"
             android:gravity="center"
             />
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="70dp"
+    android:orientation="horizontal">
         <Button
             android:id="@+id/post_story_button"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -78,6 +81,31 @@
             android:text="Post Story"
             android:textColor="#150101"
             />
+
+    <TextView
+
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="POST ANONYMOUSLY"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+    <CheckBox
+        android:id="@+id/anonymous_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="top"
+        />
+
+</LinearLayout>
 
     </LinearLayout>
 
