@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -30,22 +32,27 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
+import static java.lang.Thread.sleep;
 
 public class AppointmentBookingActivity extends Fragment {
 
     View myView;
     private Spinner citySpinner, areaSpinner, doctorSpinner;
-    EditText dateChooser;
+    static EditText dateChooser;
     private Button bookAppointment;
     private ProgressDialog progressDialog;
     private FirebaseFirestore db ;
     HashMap<String, String> cityArea;
     HashMap<String, String> areaDoc;
     private FragmentActivity myContext;
+    static SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
 
     @Nullable
     @Override
@@ -74,7 +81,11 @@ public class AppointmentBookingActivity extends Fragment {
         bookAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addBookingDatabase();
+                if (validateForm()) {
+                    addBookingDatabase();
+                }else{
+                    Toast.makeText(getActivity(), "Please check your entry", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -91,6 +102,11 @@ public class AppointmentBookingActivity extends Fragment {
         myContext=(FragmentActivity) activity;
         super.onAttach(activity);
     }
+
+    public static void setDateField(){
+        dateChooser.setText(sfd.format(DatePicker.getDate()));
+    }
+
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePicker();
@@ -109,9 +125,41 @@ public class AppointmentBookingActivity extends Fragment {
         doctorSpinner.setAdapter(doctorAdapter);
     }
 
-    public void bookAppointmentEntry(){
 
-        //
+    private boolean validateForm() {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(citySpinner.getSelectedItem().toString())) {
+            valid = false;
+        }
+
+        if (TextUtils.isEmpty(areaSpinner.getSelectedItem().toString())) {
+            valid = false;
+        }
+
+        if (TextUtils.isEmpty(doctorSpinner.getSelectedItem().toString())) {
+            valid = false;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        if (TextUtils.isEmpty(dateChooser.toString())) {
+            valid = false;
+        }
+
+//        int comp;
+//        try{
+//            //Log.d("LOGERR", sfd.parse(cal.getTime().toString()).toString());
+//            comp = (sfd.parse(dateChooser.toString())).compareTo((sfd.parse(cal.getTime().toString())));
+//            if (comp < 0){
+//                return false;
+//            }else{
+//                return true;
+//            }
+//        }catch(Exception e){
+//            valid = false;
+//        }
+
+        return valid;
     }
 
     void addBookingDatabase(){
@@ -122,6 +170,7 @@ public class AppointmentBookingActivity extends Fragment {
         data.put("userEmail", User.getUserEmail());
         data.put("userName", User.getUserGoogleName());
         data.put("booked", false);
+        data.put("date", new Timestamp(DatePicker.getDate()));
 
         try {
             db.collection("appointmentBookings")
@@ -129,8 +178,12 @@ public class AppointmentBookingActivity extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d("LOGERR", "DocumentSnapshot written with ID: " + documentReference.getId());
-                            //Toast.makeText()
+                            //Log.d("LOGERR", "DocumentSnapshot written with ID: " + documentReference.getId());
+                            Toast.makeText(getActivity(), "Your appointment is booked sucessfully.", Toast.LENGTH_LONG).show();
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.frame_layout, new story_frag())
+                                    .commit();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -140,15 +193,8 @@ public class AppointmentBookingActivity extends Fragment {
                         }
                     });
         }catch(Exception e){
-            Log.d("LOGERR", "Error Connecting to database");
+            Toast.makeText(getActivity(), "Error Connecting to Database", Toast.LENGTH_SHORT);
         }
-
-    }
-
-
-
-    public void completeBooking(){
-
 
     }
 

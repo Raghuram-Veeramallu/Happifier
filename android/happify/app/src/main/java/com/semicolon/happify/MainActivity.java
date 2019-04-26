@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -65,7 +66,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                            .replace(R.id.frame_layout, new story_frag()).commit();
                     return true;
                 case R.id.navigation_chat:
-                    loadFragment(new Users());
+                    if(User.getUserEmail().split("@")[1].equals("snu.edu.in")){
+                        loadFragment(new Users());
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "You are not authorised to use this feature", Toast.LENGTH_SHORT).show();
+                    }
 //                    fragmentManager.beginTransaction()
 //                            .replace(R.id.frame_layout, new Users()).commit();
                     return true;

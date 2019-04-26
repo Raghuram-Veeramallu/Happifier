@@ -6,10 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class DatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+
+    public static Date getDate() {
+        return date;
+    }
+
+    private static Date date;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,6 +34,15 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+
+        String selDate = (year + "-" + (month+1) + "-" + dayOfMonth);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            date = sdf.parse(selDate);
+        }catch(Exception e){
+            Log.d("LOGERR", e.getMessage());
+        }
+        AppointmentBookingActivity.setDateField();
 
     }
 }
