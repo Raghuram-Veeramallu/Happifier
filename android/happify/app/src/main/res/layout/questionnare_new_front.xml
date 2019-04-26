@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.semicolon.happify.QuestionnaireActivity"
+    android:orientation="vertical"
+    android:background="#f2c807">
+
+    <!--<TextView-->
+    <!--android:id="@+id/signOut"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAlignment="viewEnd"-->
+    <!--android:textSize="12dp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:text="Sign Out"-->
+    <!--android:background="#f1efef"-->
+    <!--android:textColor="#000000"-->
+    <!--android:paddingTop="5dp"-->
+    <!--android:paddingRight="5dp"-->
+    <!--android:layout_marginRight="7dp"-->
+    <!--android:layout_marginLeft="7dp"-->
+    <!--android:layout_marginTop="7dp"-->
+    <!--android:gravity="end" />-->
+
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="match_parent"
+        android:layout_height= "60dp"
+        android:background="#3399ff"
+        android:layout_marginBottom ="7dp"
+        />
+
+
+    <ListView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="550dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:background="#3399ff"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="20dp"/>
+
+    <!--<com.wajahatkarim3.clapfab.ClapFAB-->
+    <!--android:id="@+id/clapFAB"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--app:cf_count_circle_color="@color/colorAccent"-->
+    <!--app:cf_count_text_color="@color/white_color"-->
+    <!--app:cf_default_icon="@drawable/ic_favorite_black_24dp"-->
+    <!--app:cf_default_icon_color="@color/colorAccent"-->
+    <!--app:cf_dots_1_color="@android:color/holo_green_dark"-->
+    <!--app:cf_dots_2_color="@color/colorAccent"-->
+    <!--app:cf_filled_icon="@drawable/ic_favorite_border_black_24dp"-->
+    <!--app:cf_filled_icon_color="@color/colorAccent"-->
+    <!--app:cf_max_clap_count="20"-->
+    <!--app:cf_clap_count="10"-->
+    <!--app:cf_format_clap_count="true"-->
+    <!--app:cf_long_press_enabled="false"-->
+    <!--app:cf_long_press_clap_interval="300"/>-->
+</LinearLayout>

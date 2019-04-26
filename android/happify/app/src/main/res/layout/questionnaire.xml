@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/questionnaire_submit"
+        android:id="@+id/submit_q"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit"

@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.firebase.client.annotations.NotNull;
 import com.google.firebase.auth.FirebaseAuth;
+
+import it.ngallazzi.fancyswitch.FancySwitch;
 
 public class AskQuesPrefActivity extends AppCompatActivity {
 
@@ -30,12 +33,12 @@ public class AskQuesPrefActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.questionnaire_pref);
 
-        takeQuesPref = (Button) findViewById(R.id.take_ques_button);
+        //takeQuesPref = (Button) findViewById(R.id.take_ques_button);
         skipQuesPref = (TextView) findViewById(R.id.skip_ques);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener=new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
@@ -50,10 +53,10 @@ public class AskQuesPrefActivity extends AppCompatActivity {
         };
 
 
-        takeQuesPref.setOnClickListener(new View.OnClickListener() {
+        FancySwitch fancySwitch = findViewById(R.id.fancySwitch);
+        fancySwitch.setSwitchStateChangedListener(new FancySwitch.SwitchStateChangedListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onChanged(@NotNull FancySwitch.State newState) {
                 startActivity(new Intent(AskQuesPrefActivity.this, QuestionnaireActivity.class));
             }
         });
@@ -66,6 +69,6 @@ public class AskQuesPrefActivity extends AppCompatActivity {
             }
         });
 
-    }
 
+    }
 }
