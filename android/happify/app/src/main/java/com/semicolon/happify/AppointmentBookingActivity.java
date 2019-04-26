@@ -1,12 +1,13 @@
 package com.semicolon.happify;
 
 import android.app.Activity;
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +74,7 @@ public class AppointmentBookingActivity extends Fragment {
         bookAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bookAppointmentEntry();
+                addBookingDatabase();
             }
         });
 
@@ -108,11 +110,8 @@ public class AppointmentBookingActivity extends Fragment {
     }
 
     public void bookAppointmentEntry(){
-        String city = citySpinner.getSelectedItem().toString();
-        String area = areaSpinner.getSelectedItem().toString();
-        String doctor = doctorSpinner.getSelectedItem().toString();
 
-
+        //
     }
 
     void addBookingDatabase(){
@@ -124,21 +123,25 @@ public class AppointmentBookingActivity extends Fragment {
         data.put("userName", User.getUserGoogleName());
         data.put("booked", false);
 
-        db.collection("appointmentBookings")
-                .add(data)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                        //Toast.makeText()
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+        try {
+            db.collection("appointmentBookings")
+                    .add(data)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("LOGERR", "DocumentSnapshot written with ID: " + documentReference.getId());
+                            //Toast.makeText()
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("LOGERR", "Error adding document", e);
+                        }
+                    });
+        }catch(Exception e){
+            Log.d("LOGERR", "Error Connecting to database");
+        }
 
     }
 

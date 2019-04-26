@@ -1,7 +1,7 @@
 package com.semicolon.happify;
 
 import android.app.Dialog;
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
