@@ -107,7 +107,7 @@
         android:layout_alignStart="@+id/doctorSpinner"
         android:layout_alignBottom="@+id/dateTextHolder"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="none"/>
 
     <Button
         android:id="@+id/bookAppointButton"

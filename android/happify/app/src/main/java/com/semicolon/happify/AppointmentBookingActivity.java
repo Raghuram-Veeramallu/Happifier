@@ -3,12 +3,14 @@ package com.semicolon.happify;
 import android.app.Activity;
 //import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,6 +98,7 @@ public class AppointmentBookingActivity extends Fragment {
 
         return myView;
     }
+
 
     @Override
     public void onAttach(Activity activity) {

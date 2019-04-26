@@ -133,18 +133,18 @@ public class volunteer_chat_users extends Fragment{
             while(i.hasNext()){
                 key = i.next().toString();
                 String[] str = key.split("_");
-                if((str[0].equals(User.getUserEmail().split("@")[0]))&& (!map.containsKey(str[0]))) {
+                if((str[0].equals(User.getUserEmail().split("@")[0]))) {
                     //key +="\n"+obj.getJSONObject(key).getString("Tag");
-                    map.put(str[0],str[0]);
-                    map.put(str[1],str[1]);
+//                    map.put(str[0],str[0]);
+//                    map.put(str[1],str[1]);
                     al.add(str[1]);
                 }
-                else if((str[1].equals(User.getUserEmail().split("@")[0]))&& (!map.containsKey(str[1]))){
-                    //key +="\n"+obj.getJSONObject(key).getString("Tag");
-                    map.put(str[0],str[0]);
-                    map.put(str[1],str[1]);
-                    al.add(str[0]);
-                }
+//                else if((str[1].equals(User.getUserEmail().split("@")[0]))&& (!map.containsKey(str[1]))){
+//                    //key +="\n"+obj.getJSONObject(key).getString("Tag");
+//                    map.put(str[0],str[0]);
+//                    map.put(str[1],str[1]);
+//                    al.add(str[0]);
+//                }
 
                 totalUsers++;
             }
