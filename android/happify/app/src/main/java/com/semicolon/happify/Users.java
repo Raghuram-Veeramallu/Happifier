@@ -2,10 +2,11 @@ package com.semicolon.happify;
 
 
 
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Users extends Fragment{
+public class Users extends Fragment {
     View myView;
     ListView usersList;
     TextView noUsersText;

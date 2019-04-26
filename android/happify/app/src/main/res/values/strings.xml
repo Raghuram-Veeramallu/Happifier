@@ -17,7 +17,7 @@
     <!--Side Navigation Columns -->
     <string name="side_events">Events</string>
     <string name="side_book_app">Book an Appointment</string>
-    <string name="side_information">Information</string>
+    <string name="side_information">Take Tests</string>
     <string name="side_logout">Logout</string>
 
     <!--Profile Headers-->

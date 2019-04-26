@@ -16,7 +16,7 @@
     <item
         android:id="@+id/navigation_info"
         android:title="@string/side_information"
-        android:icon="@drawable/information"/>
+        android:icon="@drawable/test"/>
 
     <item
         android:id="@+id/navigation_logout"

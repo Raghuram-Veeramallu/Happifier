@@ -1,6 +1,7 @@
 package com.semicolon.happify;
 
 import android.app.FragmentManager;
+//import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +22,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private TextView mTextMessage;
     FragmentManager fragmentManager = getFragmentManager();
+    //FragmentTransaction fragmentTransaction = getSupportFragmentManager();
 
     FirebaseAuth mAuth;
     GoogleSignInOptions mGoogleSignInOptions;
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView userPhoto;
     public User localUser;
 
+    //fragmentTransaction = getSupportFragmentManager();
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,17 +61,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_feed:
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new story_frag()).commit();
+                    loadFragment(new story_frag());
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.frame_layout, new story_frag()).commit();
                     return true;
                 case R.id.navigation_chat:
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new Users()).commit();
+                    if(User.getUserEmail().split("@")[1].equals("snu.edu.in")){
+                        loadFragment(new Users());
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "You are not authorised to use this feature", Toast.LENGTH_SHORT).show();
+                    }
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.frame_layout, new Users()).commit();
                     return true;
                 case R.id.navigation_find_psy:
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.frame_layout, new MapsActivity2());
-                    ft.commit();
+                    loadFragment(new MapsActivity2());
+                    //fragmentManager.beginTransaction().replace(R.id.frame_layout, new MapsActivity2()).commit();
                     //fragmentManager.beginTransaction()
                     //        .replace(R.id.frame_layout, new MapsActivity2()).commit();
                     return true;
@@ -101,16 +113,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (id == R.id.navigation_events) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new EventsActivity()).commit();
+            loadFragment(new EventsActivity());
+//            fragmentManager.beginTransaction()
+//                    .replace(R.id.frame_layout, new EventsActivity()).commit();
 
         } else if (id == R.id.navigation_book_app) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new AppointmentBookingActivity()).commit();
+            loadFragment(new AppointmentBookingActivity());
+//            fragmentManager.beginTransaction()
+//                    .replace(R.id.frame_layout, new AppointmentBookingActivity()).commit();
 
         } else if (id == R.id.navigation_info) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, new MapsActivity()).commit();
+            startActivity(new Intent(this, QuestionPrefActivity.class));
+            //loadFragment(new QuestPrefListActivity());
+//            fragmentManager.beginTransaction()
+//                    .replace(R.id.frame_layout, new MapsActivity()).commit();
 
         } else if (id == R.id.navigation_logout) {
             completeSignOut();
@@ -136,7 +152,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentManager.beginTransaction().replace(R.id.frame_layout, new story_frag()).commit();
+        //fragmentManager.beginTransaction().replace(R.id.frame_layout, new story_frag()).commit();
+
+        loadFragment(new story_frag());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -177,6 +195,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigationBottom);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
 
