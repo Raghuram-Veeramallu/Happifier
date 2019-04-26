@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -62,8 +63,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .replace(R.id.frame_layout, new Users()).commit();
                     return true;
                 case R.id.navigation_find_psy:
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.frame_layout, new MapsActivity()).commit();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout, new MapsActivity2());
+                    ft.commit();
+                    //fragmentManager.beginTransaction()
+                    //        .replace(R.id.frame_layout, new MapsActivity2()).commit();
                     return true;
             }
             return false;
@@ -84,14 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -118,9 +114,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.navigation_logout) {
             completeSignOut();
-            // Remove these 2 lines lateron when the signin is setup
-//            finish();
-//            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,16 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
-
-//    private void revokeAccess() {
-//        mGoogleSignInClient.revokeAccess()
-//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        // ...
-//                    }
-//                });
-//    }
 
 
     @Override
@@ -199,13 +182,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void completeSignOut(){
         mAuth.signOut();
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        //updateUI(null);
-                    }
-                });
+        mGoogleSignInClient.signOut();
+        //mGoogleSignInClient.revokeAccess();
     }
 
     protected void setNameEmail(User user){

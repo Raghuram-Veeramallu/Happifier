@@ -16,15 +16,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -90,10 +95,6 @@ public class AppointmentBookingActivity extends Fragment {
         newFragment.show(myContext.getSupportFragmentManager(), "datePicker");
     }
 
-    public void bookAppointmentEntry(){
-
-    }
-
     public void setSpinners(){
         String[] cities = new String[]{"", "Noida", "Delhi", "Mumbai"};  // temp
         String[] areas = new String[]{"", "GB Nagar", "Dadri", "Sonpet"};
@@ -106,31 +107,45 @@ public class AppointmentBookingActivity extends Fragment {
         doctorSpinner.setAdapter(doctorAdapter);
     }
 
+    public void bookAppointmentEntry(){
+        String city = citySpinner.getSelectedItem().toString();
+        String area = areaSpinner.getSelectedItem().toString();
+        String doctor = doctorSpinner.getSelectedItem().toString();
 
-    public void Loaddatafromfirebase(){
 
-        db.collection("PsychiatristLocations")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    }
+
+    void addBookingDatabase(){
+        Map<String, Object> data = new HashMap<>();
+        data.put("area",areaSpinner.getSelectedItem().toString());
+        data.put("city", citySpinner.getSelectedItem().toString());
+        data.put("doctor",doctorSpinner.getSelectedItem().toString());
+        data.put("userEmail", User.getUserEmail());
+        data.put("userName", User.getUserGoogleName());
+        data.put("booked", false);
+
+        db.collection("appointmentBookings")
+                .add(data)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        cityArea = new HashMap<>();
-                        areaDoc = new HashMap<>();
-                        for (DocumentSnapshot document : task.getResult()) {
-                            String cityName = document.getString("City");
-                            String areaName = document.getString("Location");
-                            String doctorName = document.getString("Doctor");
-                            cityArea.put(cityName, areaName);
-                            areaDoc.put(areaName, doctorName);
-                        }
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        //Toast.makeText()
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error getting documents.");
+                        Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+    }
+
+
+
+    public void completeBooking(){
+
 
     }
 
