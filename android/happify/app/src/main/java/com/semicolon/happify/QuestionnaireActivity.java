@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -22,34 +23,41 @@ import java.util.ArrayList;
 
 public class QuestionnaireActivity extends AppCompatActivity {
 
+
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
 
     ListView listView;
 
     ArrayList<String> Question_ques = new ArrayList<>();
-    ArrayList<String> Question_opt_sel=new ArrayList<String>();
-
+    ArrayList<String> selected=new ArrayList<String>();
+    static int score = 0;
     Button submitQuest;
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //mAuth.addAuthStateListener(mAuthListener);
+        score = 0;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.questionnaire);
+        setContentView(R.layout.questionnare_new_front);
 
-        listView = findViewById(R.id.questions_list_format);
-        submitQuest = findViewById(R.id.questionnaire_submit);
-
+        listView = (ListView) findViewById(R.id.rv);
+        submitQuest = findViewById(R.id.submit);
         submitQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 startActivity(new Intent(QuestionnaireActivity.this, MainActivity.class));
+                Toast.makeText(QuestionnaireActivity.this, "" + score, Toast.LENGTH_SHORT).show();
+
             }
         });
+
 
         addQuestionsToList();
         setup_questions_list();
@@ -149,24 +157,24 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     RadioButton rb=findViewById(checkedId);
 
                     String text = rb.getText().toString();
-//                    selected.add(text);
+                    selected.add(text);
 
-//                    if (text.equalsIgnoreCase("Rarely"))
-//                    {
-//                        score=score+1;
-//                    }
-//                    else if (text.equalsIgnoreCase("Never"))
-//                    {
-//                        score=score+0;
-//                    }
-//                    else if (text.equalsIgnoreCase("Often"))
-//                    {
-//                        score=score+3;
-//                    }
-//                    else if (text.equalsIgnoreCase("All the time"))
-//                    {
-//                        score=score+5;
-//                    }
+                    if (text.equalsIgnoreCase("Rarely"))
+                    {
+                        score=score+1;
+                    }
+                    else if (text.equalsIgnoreCase("Never"))
+                    {
+                        score=score+0;
+                    }
+                    else if (text.equalsIgnoreCase("Often"))
+                    {
+                        score=score+3;
+                    }
+                    else if (text.equalsIgnoreCase("All the time"))
+                    {
+                        score=score+5;
+                    }
                 }
             });
 
@@ -176,8 +184,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
         }
     }
-
-
 
 
 }

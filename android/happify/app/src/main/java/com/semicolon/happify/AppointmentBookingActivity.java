@@ -114,9 +114,9 @@ public class AppointmentBookingActivity extends Fragment {
     }
 
     public void setSpinners(){
-        String[] cities = new String[]{"", "Noida", "Delhi", "Mumbai"};  // temp
+        String[] cities = new String[]{"", "Noida", "Delhi", "Mumbai"};
         String[] areas = new String[]{"", "GB Nagar", "Dadri", "Sonpet"};
-        String[] doctors = new String[]{"", "SD", "VS", "RJ"};
+        String[] doctors = new String[]{"", "Jyoti Glory Bernard", "Rima Sethi", "Nikhita Prabhakar"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
         citySpinner.setAdapter(adapter);
         ArrayAdapter<String> areaAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, areas);

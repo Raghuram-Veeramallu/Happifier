@@ -26,9 +26,10 @@ public class QuestionnaireActivity4 extends AppCompatActivity {
     ListView listView;
 
     ArrayList<String> Question_ques = new ArrayList<>();
-    ArrayList<String> Question_opt_sel=new ArrayList<String>();
+    ArrayList<String> selected=new ArrayList<String>();
 
     Button submitQuest;
+    static int score = 0;
 
 
 
@@ -36,10 +37,10 @@ public class QuestionnaireActivity4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.questionnaire);
+        setContentView(R.layout.questionnare_new_front);
 
-        listView = findViewById(R.id.questions_list_format);
-        submitQuest = findViewById(R.id.questionnaire_submit);
+        listView = findViewById(R.id.rv);
+        submitQuest = findViewById(R.id.submit);
 
         submitQuest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,24 +142,24 @@ public class QuestionnaireActivity4 extends AppCompatActivity {
                     RadioButton rb=findViewById(checkedId);
 
                     String text = rb.getText().toString();
-//                    selected.add(text);
+                    selected.add(text);
 
-//                    if (text.equalsIgnoreCase("Rarely"))
-//                    {
-//                        score=score+1;
-//                    }
-//                    else if (text.equalsIgnoreCase("Never"))
-//                    {
-//                        score=score+0;
-//                    }
-//                    else if (text.equalsIgnoreCase("Often"))
-//                    {
-//                        score=score+3;
-//                    }
-//                    else if (text.equalsIgnoreCase("All the time"))
-//                    {
-//                        score=score+5;
-//                    }
+                    if (text.equalsIgnoreCase("Rarely"))
+                    {
+                        score=score+1;
+                    }
+                    else if (text.equalsIgnoreCase("Never"))
+                    {
+                        score=score+0;
+                    }
+                    else if (text.equalsIgnoreCase("Often"))
+                    {
+                        score=score+3;
+                    }
+                    else if (text.equalsIgnoreCase("All the time"))
+                    {
+                        score=score+5;
+                    }
                 }
             });
 

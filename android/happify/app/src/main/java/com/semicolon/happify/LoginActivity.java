@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 //            Intent i=new Intent(LoginActivity.this,MainActivity.class);
 
             finish();
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            startActivity(new Intent(LoginActivity.this,AskQuesPrefActivity.class));
 
             //findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
         } else {
