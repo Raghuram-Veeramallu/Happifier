@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         volunteerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //volunteerLogprocess();
+                volunteerLogProcess();
 
             }
         });
@@ -137,9 +137,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     protected void volunteerLogProcess(){
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-        // Check with database
+        Intent volunteer_login = new Intent(getApplicationContext(),volunteer_login_activity.class);
+        startActivity(volunteer_login);
+        finish();
 
     }
 

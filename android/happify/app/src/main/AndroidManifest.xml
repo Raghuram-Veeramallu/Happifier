@@ -30,6 +30,8 @@
         <activity android:name=".AskQuesPrefActivity" />
         <activity android:name=".Chat" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".VolunteerMainActivity" />
+        <activity android:name=".volunteer_login_activity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".QuestionnaireActivity" />
         <activity android:name=".QuestionPrefActivity" />
