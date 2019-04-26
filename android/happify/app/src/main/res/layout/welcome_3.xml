@@ -11,10 +11,18 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:foregroundTint="@android:color/white"
+            android:gravity="center"
+            android:src="@drawable/news_main" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_text3"
+            android:text="Know Others"
+            android:paddingTop="30dp"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="30dp"
@@ -26,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="Get in touch with psychiatrists near you."
+            android:text="Get to know people around you."
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />

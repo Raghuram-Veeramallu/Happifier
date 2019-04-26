@@ -33,8 +33,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
     FragmentManager fragmentManager = getFragmentManager();
 
     FirebaseAuth mAuth;
-    GoogleSignInOptions mGoogleSignInOptions;
-    GoogleSignInClient mGoogleSignInClient;
+    //GoogleSignInOptions mGoogleSignInOptions;
+    //GoogleSignInClient mGoogleSignInClient;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     private TextView userName;
@@ -134,12 +134,12 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
 
         mAuth=FirebaseAuth.getInstance();
 
-        mGoogleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+        //mGoogleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        //        .requestIdToken(getString(R.string.default_web_client_id))
+        //        .requestEmail()
+        //        .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions);
+        //mGoogleSignInClient = GoogleSignIn.getClient(this, mGoogleSignInOptions);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -148,7 +148,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
                 if (firebaseAuth.getCurrentUser()==null)
                 {
                     finish();
-                    startActivity(new Intent(VolunteerMainActivity.this,LoginActivity.class));
+                    startActivity(new Intent(VolunteerMainActivity.this, LoginActivity.class));
                 } else{
                     localUser = new User(mAuth.getCurrentUser().getDisplayName(), mAuth.getCurrentUser().getEmail(), mAuth.getCurrentUser().getPhotoUrl());
                     setNameEmail(localUser);
@@ -161,7 +161,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.volunteer_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.volunteer_navigationBottom);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -169,7 +169,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
 
     private void completeSignOut(){
         mAuth.signOut();
-        mGoogleSignInClient.signOut();
+        //mGoogleSignInClient.signOut();
         //mGoogleSignInClient.revokeAccess();
     }
 
@@ -195,7 +195,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout, fragment)
+                    .replace(R.id.volunteer_frame_layout, fragment)
                     .commit();
             return true;
         }

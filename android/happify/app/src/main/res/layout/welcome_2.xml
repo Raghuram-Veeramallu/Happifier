@@ -18,13 +18,13 @@
             android:layout_height="200dp"
             android:foregroundTint="@android:color/white"
             android:gravity="center"
-            android:src="@drawable/mental_health_white" />
+            android:src="@drawable/chat_main" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Something..."
+            android:text="Chat with others"
             android:textColor="@android:color/white"
             android:gravity="center"
             android:paddingTop="30dp"
@@ -38,7 +38,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="Something"
+            android:text="Chat with experienced people"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
