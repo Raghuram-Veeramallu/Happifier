@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/volunteer_navigation_events"
+        android:title="@string/side_events"
+        android:icon="@drawable/events" />
+
+
+    <item
+        android:id="@+id/volunteer_navigation_logout"
+        android:title="@string/side_logout"
+        android:icon="@drawable/logout"/>
+
+
+</menu>
