@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -48,12 +49,14 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.volunteer_navigation_feed:
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.volunteer_frame_layout, new story_frag()).commit();
-                    return true;
+                    loadFragment(new story_frag());
+//                    fragmentManager.beginTransaction()
+//                        .replace(R.id.volunteer_frame_layout, new story_frag()).commit();
+                return true;
                 case R.id.volunteer_navigation_chat:
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.volunteer_frame_layout, new volunteer_chat_users()).commit();
+                    loadFragment(new volunteer_chat_users());
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.volunteer_frame_layout, new volunteer_chat_users()).commit();
                     return true;
 
             }
@@ -88,8 +91,9 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
 
 
         if (id == R.id.volunteer_navigation_events) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.volunteer_frame_layout, new EventsActivity()).commit();
+            loadFragment(new EventsActivity());
+//            fragmentManager.beginTransaction()
+//                    .replace(R.id.volunteer_frame_layout, new EventsActivity()).commit();
 
         }
 
@@ -117,7 +121,9 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentManager.beginTransaction().replace(R.id.volunteer_frame_layout, new story_frag()).commit();
+       // fragmentManager.beginTransaction().replace(R.id.volunteer_frame_layout, new story_frag()).commit();
+
+        loadFragment(new story_frag());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.volunteer_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -183,6 +189,17 @@ public class VolunteerMainActivity extends AppCompatActivity implements Navigati
                 Log.d("LOGERR","Couldn't not load image "+e.getMessage());
             }
         }
+    }
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
 

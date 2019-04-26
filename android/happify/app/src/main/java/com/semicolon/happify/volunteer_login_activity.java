@@ -32,6 +32,7 @@ public class volunteer_login_activity extends AppCompatActivity implements View.
     private EditText passwordField;
     private Button loginButton;
 
+
     private FirebaseAuth mAuth;
 
     @Override
