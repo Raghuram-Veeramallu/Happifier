@@ -12,11 +12,19 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:foregroundTint="@android:color/white"
+            android:gravity="center"
+            android:src="@drawable/mental_health_white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_text1"
             android:gravity="center"
+            android:text="Something"
+            android:paddingTop="30dp"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="30dp"
@@ -28,7 +36,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text=""
+            android:text="Something more"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@android:color/white"

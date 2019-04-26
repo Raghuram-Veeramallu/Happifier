@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button googleLogin, volunteerLogin;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
-    private static final int RC_SIGN_IN=2;
+    private static final int RC_SIGN_IN = 2;
 
     public ProgressDialog mProgressDialog;
 
@@ -86,9 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
+                Toast.makeText(getApplicationContext(), "Google Signin Failed. Please check your internet connection.", Toast.LENGTH_SHORT).show();
                 Log.w("LOGERR", "Google sign in failed", e);
                 updateUI(null);
-                // ...
             }
         }
     }
