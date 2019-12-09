@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Happify</string>
+    <string name="app_name">Happifier</string>
 
     <!--DUMMY-->
     <string name="nav_header_desc">Navigation header</string>
